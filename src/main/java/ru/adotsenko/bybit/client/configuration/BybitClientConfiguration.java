@@ -20,7 +20,7 @@ public class BybitClientConfiguration {
                 bybitApiProperties,
                 WebClient
                         .builder()
-                        .baseUrl(BybitUri.getRestUri(bybitApiProperties.getMode()))
+                        .baseUrl(BybitUri.getRestUri(bybitApiProperties.getMode()).toString())
                         .build()
         );
     }
