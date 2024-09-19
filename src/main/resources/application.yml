@@ -1,0 +1,8 @@
+ru:
+  adotsenko:
+    bybit:
+      client:
+        enabled: true
+        ws-enabled: true
+        token:
+        mode: prod
