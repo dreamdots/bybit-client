@@ -1,6 +1,5 @@
 package ru.adotsenko.bybit.client.api.impl;
 
-import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.ParameterizedTypeReference;
@@ -25,17 +24,11 @@ public class BybitClientImpl implements BybitClient {
     private final BybitApiProperties bybitApiProperties;
     private final WebClient webClient;
 
-    @PostConstruct
-    private void init() {
-        kline(Category.SPOT, "BTCUSDT", Interval._1MIN, null, null, 1000)
-                .log()
-                .subscribe();
-    }
-
     @Override
     public Mono<BybitResponse<ServerTime>> serverTime() {
         return get("/v5/market/time")
-                .bodyToMono(new ParameterizedTypeReference<BybitResponse<ServerTime>>() {})
+                .bodyToMono(new ParameterizedTypeReference<BybitResponse<ServerTime>>() {
+                })
                 .subscribeOn(Schedulers.boundedElastic());
     }
 
@@ -57,7 +50,8 @@ public class BybitClientImpl implements BybitClient {
                 .build();
 
         return get("/v5/market/kline", builder)
-                .bodyToMono(new ParameterizedTypeReference<BybitResponse<KlineList>>() {})
+                .bodyToMono(new ParameterizedTypeReference<BybitResponse<KlineList>>() {
+                })
                 .subscribeOn(Schedulers.boundedElastic());
     }
 
